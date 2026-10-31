@@ -215,8 +215,7 @@ static void finish_gc(MVMThreadContext *tc, MVMuint8 gen, MVMuint8 is_coordinato
         int destroying = MVM_load(&thread_obj->body.stage) == MVM_thread_stage_clearing_nursery;
 
         /* Free gen2 unmarked if full collection. A thread being destroyed is
-         * swept too, before its gen2 is transferred: stale GEN2_LIVE marks
-         * would make the next full collection skip tracing those objects. */
+         * swept too, before its gen2 is transferred */
         if (gen == MVMGCGenerations_Both) {
             GCDEBUG_LOG(tc, MVM_GC_DEBUG_ORCHESTRATE,
                 "Thread %d run %d : freeing gen2 of thread %d%s\n",
